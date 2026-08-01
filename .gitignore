@@ -1,0 +1,7 @@
+# Ignore PostgreSQL data
+data/db/
+*.fsm
+*.vm
+*.wal
+*.dat
+*.log
