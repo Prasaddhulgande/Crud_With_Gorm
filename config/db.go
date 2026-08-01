@@ -3,7 +3,7 @@ package config
 import (
 	"gorm.io/driver/postgres"
 	"gorm.io/gorm"
-	"gin-gorm-rest-docker/models"
+	"github.com/Prasaddhulgande/Crud_With_Gorm/models"
 )
    var DB *gorm.DB
 func ConnectDB() {
