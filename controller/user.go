@@ -1,10 +1,14 @@
 package controller
 
 import (
+	"fmt"
 	"github.com/gin-gonic/gin"
 	"github.com/Prasaddhulgande/Crud_With_Gorm/models"
 	"github.com/Prasaddhulgande/Crud_With_Gorm/config"
+	"github.com/go-playground/validator/v10"
 )
+
+var validate = validator.New()
 
 func GetUsers(c *gin.Context) {
 	users := []models.User{}
@@ -24,6 +28,12 @@ func GetUserById(c *gin.Context) {
 func CreateUser(c *gin.Context) {
 	var user models.User
 	c.BindJSON(&user)
+
+	// validations 
+	if err:= validate.Struct(user); err!=nil {
+		c.JSON(400, gin.H{"Error": err.Error()})
+		return
+	}
 	config.DB.Create(&user)
 	c.JSON(200, &user)
 }
@@ -55,6 +65,11 @@ func UpdateUser(c *gin.Context) {
      //Bind new data
 	if err:= c.BindJSON(&user); err!= nil{
 		c.JSON(400, gin.H{"error": "Invalid JSON"})
+	}
+	//Validate user data
+	if err:= validate.Struct(user); err!=nil{
+		c.JSON(400, gin.H{"Error": err.Error()})
+		fmt.Println("Error", err.Error())        //Only Checking
 	}
     // Save updated data
 	config.DB.Save(&user)
