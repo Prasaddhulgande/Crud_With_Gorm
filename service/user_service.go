@@ -4,7 +4,7 @@ import (
 	"github.com/Prasaddhulgande/Crud_With_Gorm/models"
 	"github.com/Prasaddhulgande/Crud_With_Gorm/config"
 )
-// Services doing only DB related tasks like... connect to DB, search users from DB, talking to DB
+// Services speak only Business doing only DB related tasks like... connect to DB, search users from DB, talking to DB
 
 func GetAllUsers() ([]models.User, error) {
       var users []models.User                      // []models.User because of getting array of users, all users
