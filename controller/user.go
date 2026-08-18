@@ -11,6 +11,14 @@ import (
 
 //var validate = validator.New()
  // Now controller onaly talking to HTTP , Previosuly it talking with DB & HTTP
+
+// GetUsers godoc
+// @Summary Get all users
+// @Description Retrieve all users from the database
+// @Tags Users
+// @Produce json
+// @Success 200 {array} models.User
+// @Router /users [get]
 func GetUsers(c *gin.Context) {
 	users, err:= service.GetAllUsers()
 	if err!= nil {
@@ -21,6 +29,16 @@ func GetUsers(c *gin.Context) {
 	// config.DB.Find(&users)
 	c.JSON(200, users)
 }
+
+// GetUserById godoc
+// @Summary Get user by ID
+// @Description Retrieve a single user by ID
+// @Tags Users
+// @Produce json
+// @Param id path int true "User ID"
+// @Success 200 {object} models.User
+// @Failure 404 {object} map[string]string
+// @Router /users/{id} [get]
 func GetUserById(c *gin.Context) {
 	//var user models.User
 	id := c.Param("id")
@@ -35,6 +53,15 @@ func GetUserById(c *gin.Context) {
 	// }
 	c.JSON(200, user)
 }
+// CreateUser godoc
+// @Summary Create a new user
+// @Description Add a new user to the database
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param user body models.User true "User data"
+// @Success 201 {object} models.User
+// @Router /users [post]
 func CreateUser(c *gin.Context) {
 	var user models.User
 
@@ -55,6 +82,16 @@ func CreateUser(c *gin.Context) {
 	
 	c.JSON(201, user)
 }
+// UpdateUser godoc
+// @Summary Update user by ID
+// @Description Modify user details
+// @Tags Users
+// @Accept json
+// @Produce json
+// @Param id path int true "User ID"
+// @Param user body models.User true "Updated user data"
+// @Success 200 {object} models.User
+// @Router /users/{id} [put]
 func UpdateUser(c *gin.Context) {
 	id := c.Param("id")
     existingUser, err :=service.GetUserByID(id)
@@ -80,6 +117,13 @@ func UpdateUser(c *gin.Context) {
 	c.JSON(200, existingUser)
 	
 }
+// DeleteUser godoc
+// @Summary Delete user by ID
+// @Description Remove user from database
+// @Tags Users
+// @Param id path int true "User ID"
+// @Success 200 {object} map[string]string
+// @Router /users/{id} [delete]
 func DeleteUser(c *gin.Context) {
 	//var user models.User
 	id := c.Param("id")
