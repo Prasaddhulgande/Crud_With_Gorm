@@ -8,6 +8,8 @@ type User struct {
     ID        uint       `json:"id,omitempty" gorm:"primaryKey" swaggerignore:"true"`
     Name      string     `json:"name" example:"Prasad"`
     Email     string     `json:"email" example:"prasad@gmail.com"`
+    Password  string     `json:"password,omitempty" swaggerignore:"true"`
+    Role     string `json:"role" gorm:"default:user"` // "user" or "admin"
     CreatedAt time.Time  `json:"created_at,omitempty" swaggerignore:"true"`
     UpdatedAt time.Time  `json:"updated_at,omitempty" swaggerignore:"true"`
     DeletedAt *time.Time `json:"deleted_at,omitempty" swaggerignore:"true" gorm:"index"`

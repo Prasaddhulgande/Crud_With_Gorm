@@ -12,10 +12,15 @@ import (
 	"github.com/swaggo/gin-swagger"
 	swaggerFiles "github.com/swaggo/files"
     _ "github.com/Prasaddhulgande/Crud_With_Gorm/docs"
+	"github.com/joho/godotenv"
 )
 
 
 func main() {
+	err := godotenv.Load()
+if err != nil {
+    panic("Error loading .env file")
+}
     
 	router := gin.Default()
 
