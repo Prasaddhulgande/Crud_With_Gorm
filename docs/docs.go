@@ -204,6 +204,9 @@ var SwaggerInfo = &swag.Spec{
 	SwaggerTemplate:  docTemplate,
 	
 }
+/*//Delete below two things from docs/docs.go line number 205
+    LeftDelim:        "{{",
+	RightDelim:       "}}", */
 
 func init() {
 	swag.Register(SwaggerInfo.InstanceName(), SwaggerInfo)
